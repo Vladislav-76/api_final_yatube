@@ -21,7 +21,7 @@ class Post(models.Model):
     image = models.ImageField(
         upload_to='posts/', null=True, blank=True)
     group = models.ForeignKey(
-        Group, on_delete=models.CASCADE,
+        Group, on_delete=models.SET_NULL,
         related_name="posts", blank=True, null=True
     )
 
@@ -53,12 +53,7 @@ class Follow(models.Model):
     )
 
     class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=['user', 'following'],
-                name='unique_user_following'
-            )
-        ]
+        unique_together = ('user', 'following')
 
     def __str__(self):
         name = f'{self.user}-{self.following}'

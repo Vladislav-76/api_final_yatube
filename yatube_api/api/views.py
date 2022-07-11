@@ -58,12 +58,8 @@ class CommentViewSet(viewsets.ModelViewSet):
         )
 
 
-class ListRetrieveViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
-                          viewsets.GenericViewSet):
-    pass
-
-
-class GroupViewSet(ListRetrieveViewSet):
+class GroupViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
+                   viewsets.GenericViewSet):
     """
     Получение списка доступных сообществ.
     Получение информации о сообществе по id.
@@ -72,12 +68,8 @@ class GroupViewSet(ListRetrieveViewSet):
     serializer_class = GroupSerializer
 
 
-class ListCreateViewSet(mixins.ListModelMixin, mixins.CreateModelMixin,
-                        viewsets.GenericViewSet):
-    pass
-
-
-class FollowViewSet(ListCreateViewSet):
+class FollowViewSet(mixins.ListModelMixin, mixins.CreateModelMixin,
+                    viewsets.GenericViewSet):
     """
     Возвращает подписки пользователя. Анонимные запросы запрещены.
     Создает подписку пользователя от имени которого сделан запрос
